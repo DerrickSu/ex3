@@ -1,6 +1,6 @@
 function p = predictOneVsAll(all_theta, X)
-%PREDICT Predict the label for a trained one-vs-all classifier. The labels 
-%are in the range 1..K, where K = size(all_theta, 1). 
+% PREDICT Predict the label for a trained one-vs-all classifier. The labels 
+% are in the range 1..K, where K = size(all_theta, 1). 
 %  p = PREDICTONEVSALL(all_theta, X) will return a vector of predictions
 %  for each example in the matrix X. Note that X contains the examples in
 %  rows. all_theta is a matrix where the i-th row is a trained logistic
@@ -9,11 +9,11 @@ function p = predictOneVsAll(all_theta, X)
 %  for 4 examples) 
 
 m = size(X, 1);
-num_labels = size(all_theta, 1);
+num_labels = size(all_theta, 1); % number of class
 
 % You need to return the following variables correctly 
 p = zeros(size(X, 1), 1);
-
+prob_label = zeros(size(X, 1), 1);
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
 
@@ -29,10 +29,11 @@ X = [ones(m, 1) X];
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
 %       
+% all_theta , X , p , max(A, [], 2)  2 means by row
 
-
-
-
+all_p = X* all_theta' ;
+% all_p is m*(n+1) matrix
+[prob_label,p] = max(all_p , [] , 2) ;
 
 
 
